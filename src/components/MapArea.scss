@@ -1,0 +1,9 @@
+.mapArea {
+    position: relative;
+    margin: auto;
+    width: 500px;
+    min-height: 500px;
+    background-color: lightgray;
+    display: flex;
+    flex-flow: row wrap;
+}
