@@ -1,61 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './MapArea.scss';
-
+import Map from '../map.png';
+import {MapContext} from './MapContext';
 import MapItem from './MapItem';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const MapArea = () => {
+    const [maps, setMaps] = useContext(MapContext);
 
-    const [maps, setMaps] = useState([
-        {
-            id: "item01",
-            avail: true,
-            price: '$123,000',
-        },
-        {
-            id: "item02",
-            avail: false,
-            price: '$700',
-        },
-        {
-            id: "item03",
-            avail: true,
-            price: '$500',
-        },
-        {
-            id: "item04",
-            avail: false,
-            price: '$10',
-        },
-        {
-            id: "item05",
-            avail: true,
-            price: '$300',
-        },
-        {
-            id: "item06",
-            avail: true,
-            price: '$9,000',
-        },
-        {
-            id: "item07",
-            avail: false,
-            price: '$5,000',
-        },
-        {
-            id: "item08",
-            avail: true,
-            price: '$500',
-        },
-        {
-            id: "item09",
-            avail: false,
-            price: '$300',
-        },
-    ]);
+    const openData = () => {
+        document.querySelector('.mapArea__data').classList.add('u-isOpen');
+    }
 
     return(
-        <div className="mapArea">
-            <MapItem maps={maps} setMaps={setMaps} />
+        <div className="main">
+            <div className="mapArea__map">
+                <TransformWrapper
+                    limitToBounds={true}
+                >
+                    <TransformComponent>
+                        {/* <div className="mapArea__mapOut" style={{backgroundImage: "url(" + Map + ")"}}></div> */}
+                        <img src={Map} alt="map" />
+                        <div className="mapArea__area">
+                            <div className="mapArea__point mapArea__point--1" onClick={openData}>A</div>
+                            <div className="mapArea__point mapArea__point--2">B</div>
+                            <div className="mapArea__point mapArea__point--3">C</div>
+                            <div className="mapArea__point mapArea__point--4">D</div>
+                            <div className="mapArea__point mapArea__point--5">E</div>
+                            <div className="mapArea__point mapArea__point--6">F</div>
+                        </div>
+                    </TransformComponent>
+                </TransformWrapper>
+            </div>
+            <div className="mapArea__data">
+                <div className="mapArea__dataInner">
+                <TransformWrapper>
+                    <TransformComponent>
+                        <MapItem maps={maps} setMaps={setMaps} />
+                    </TransformComponent>
+                </TransformWrapper>
+                </div>
+            </div>
+
         </div>
     )
 }
